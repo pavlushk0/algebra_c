@@ -27,63 +27,41 @@ float vec2_lenght(const vec2_t v) {
 
 }
 
-void vec3_normalize_self(vec3_t v) {
+void vec2_normalize(vec2_t v) {
 	float len;
 	
-	len = vec3_lenght(v);
+	len = vec2_lenght(v);
 
 	if (len > f_eps) {
 		v[_ZC] = v[_ZC] / len;
 		v[_XC] = v[_XC] / len;
-		v[_YC] = v[_YC] / len;
 	} else {
-		printf("vec3_normalize_self(): vector is too short!");
+		printf("vec2_normalize_self(): vector is too short!");
 		return;
 	}
 }
 
-void vec3_get_normalize(const vec3_t v, vec3_t rt) {
-	vec3_copy(v, rt);
-
-	vec3_normalize_self(rt);
-}
-
-void vec3_scale(const vec3_t v, const float scale, vec3_t rt) {
+void vec2_scale(const vec2_t v, const float scale, vec3_t rt) {
 	rt[0] *= scale;
 	rt[1] *= scale;
-	rt[2] *= scale;
 }
 
-void vec3_invert_self(vec3_t v) {
+void vec2_invert(vec2_t v) {
 	v[_XC] = -v[_XC];
 	v[_YC] = -v[_YC];
-	v[_ZC] = -v[_ZC];
 }
 
-void vec3_get_invert(const vec3_t v, vec3_t rt) {
-	vec3_copy(v, rt);
-
-	vec3_invert_self(rt);
+float vec2_dot(const vec2_t a, const vec2_t b) {
+	return a[0]*b[0] + a[1]*b[1];
 }
 
-float vec3_dot(const vec3_t a, const vec3_t b) {
-	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
-}
-
-void vec3_sum(const vec3_t a, const vec3_t b, vec3_t rt) {
+void vec2_sum(const vec2_t a, const vec2_t b, vec2_t rt) {
 	rt[0] = a[0] + b[0];
 	rt[1] = a[1] + b[1];
-	rt[2] = a[2] + b[2];
 }
 
-void vec3_sub(const vec3_t a, const vec3_t b, vec3_t rt) {
+void vec2_sub(const vec2_t a, const vec2_t b, vec2_t rt) {
 	rt[0] = a[0] - b[0];
 	rt[1] = a[1] - b[1];
-	rt[2] = a[2] - b[2];
 }
 
-void vec3_cross(const vec3_t a, const vec3_t b, vec3_t rt) {
-	rt[0] = a[_YC]*b[_ZC] - a[_ZC]*b[_YC];
-	rt[1] = a[_ZC]*b[_XC] - a[_XC]*b[_ZC];
-	rt[2] = a[_XC]*b[_YC] - a[_YC]*b[_XC];
-}

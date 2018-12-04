@@ -31,7 +31,7 @@ float vec3_lenght(const vec3_t v) {
 
 }
 
-void vec3_normalize_self(vec3_t v) {
+void vec3_normalize(vec3_t v) {
 	float len;
 	
 	len = vec3_lenght(v);
@@ -46,28 +46,16 @@ void vec3_normalize_self(vec3_t v) {
 	}
 }
 
-void vec3_get_normalize(const vec3_t v, vec3_t rt) {
-	vec3_copy(v, rt);
-
-	vec3_normalize_self(rt);
-}
-
 void vec3_scale(const vec3_t v, const float scale, vec3_t rt) {
 	rt[0] *= scale;
 	rt[1] *= scale;
 	rt[2] *= scale;
 }
 
-void vec3_invert_self(vec3_t v) {
+void vec3_invert(vec3_t v) {
 	v[_XC] = -v[_XC];
 	v[_YC] = -v[_YC];
 	v[_ZC] = -v[_ZC];
-}
-
-void vec3_get_invert(const vec3_t v, vec3_t rt) {
-	vec3_copy(v, rt);
-
-	vec3_invert_self(rt);
 }
 
 float vec3_dot(const vec3_t a, const vec3_t b) {
