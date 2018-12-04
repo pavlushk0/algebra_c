@@ -1,33 +1,29 @@
-
 #include "stdio.h"
 #include "math.h"
 #include "string.h"
 #include "algebra.h"
 
-void vec3_copy(const vec3_t v, vec3_t rt) {
-	memcpy(rt, v, sizeof(float)*3);
+void vec2_copy(const vec2_t v, vec2_t rt) {
+	memcpy(rt, v, sizeof(float)*2);
 }
 
-void vec3_show(const vec3_t v) {
-	printf("%5.2f %5.2f %5.2f\n", v[_XC], v[_YC], v[_ZC]);
+void vec2_show(const vec2_t v) {
+	printf("%5.2f %5.2f\n", v[_XC], v[_YC]);
 }
 
-void vec3_zero(vec3_t v) {
+void vec2_zero(vec2_t v) {
 	v[0] = 0.0f;
 	v[1] = 0.0f;
-	v[2] = 0.0f;
 }
 
-void vec3_set(float x, float y, float z, vec3_t rt) {
+void vec2_set(float x, float y, vec3_t rt) {
 	rt[0] = x;
 	rt[1] = y;
-	rt[2] = z;
 }
 
-float vec3_lenght(const vec3_t v) {
+float vec2_lenght(const vec2_t v) {
 	return sqrtf(v[_XC]*v[_XC] +
-				 v[_YC]*v[_YC] +
-				 v[_ZC]*v[_ZC]);
+				 v[_YC]*v[_YC]);
 
 }
 

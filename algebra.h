@@ -5,8 +5,12 @@
 #include "stdint.h"
 #include "stdbool.h"
 
+enum {_XC, _YC, _ZC, _WC};
+
+typedef float vec2_t[2];
 typedef float vec3_t[3];
 typedef float vec4_t[4];
+typedef float mtrx2_t[4];
 typedef float mtrx3_t[9];
 typedef float mtrx4_t[16];
 typedef float qtnn_t[4];
@@ -16,18 +20,28 @@ typedef struct {
     float *mtrx;
 } mtrxC_t;
 
-extern const int8_t _XC;
-extern const int8_t _YC;
-extern const int8_t _ZC;
-extern const int8_t _WC;
-
 #define f_eps 0.000001f
 
+void    vec2_copy(const vec2_t v, vec2_t rt);
 void    vec3_copy(const vec3_t v, vec3_t rt);
-void 	vec3_show(const vec3_t v); 
+void    vec4_copy(const vec4_t v, vec4_t rt);
+
+void    vec2_show(const vec2_t v);
+void 	vec3_show(const vec3_t v);
+void    vec4_show(const vec4_t v);
+
+void    vec2_zero(vec2_t v);
 void    vec3_zero(vec3_t v);
+void    vec4_zero(vec4_t v);
+
+void    vec2_set(float x, float y, vec3_t rt);
 void 	vec3_set(float x, float y, float z, vec3_t rt);
+void    vec4_set(float x, float y, float z, float w, vec3_t rt);
+
+float 	vec2_lenght(const vec2_t v);
 float 	vec3_lenght(const vec3_t v);
+float 	vec4_lenght(const vec4_t v);
+
 void 	vec3_normalize_self(vec3_t v);
 void	vec3_get_normalize(const vec3_t v, vec3_t rt);
 void	vec3_scale(const vec3_t v,const float scale, vec3_t rt);
@@ -60,22 +74,6 @@ void	mtrx3_get_transpose(const mtrx3_t m, mtrx3_t rt);
 void	mtrx3_tranpose_self(mtrx3_t m);
 void    mtrx3_get_inv(const mtrx3_t m, mtrx3_t rt);
 
-void 	mtrx4_copy(const mtrx4_t m, mtrx4_t rt);
-void    mtrx4_zero(mtrx4_t m);
-void    mtrx4_set(float a00, float a01, float a02, float a03,
-                  float a10, float a11, float a12, float a13,
-                  float a20, float a21, float a22, float a23,
-                  float a30, float a31, float a32, float a33,
-                  mtrx3_t rt);
-void	mtrx4_show(const mtrx4_t m);
-void	mtrx4_idtt(mtrx4_t rt);
-void	mtrx4_lu(const mtrx4_t m, mtrx4_t lm, mtrx4_t um);
-void	mtrx4_ldlt(const mtrx4_t m, mtrx4_t lm, vec4_t dv);
-void	mtrx4_get_transpose(const mtrx4_t m, mtrx4_t rt);
-void	mtrx4_tranpose_self(mtrx4_t m);
-void    mtrx4_get_inv(const mtrx4_t m, mtrx4_t rt);
-void    mtrx4_get_inv_gauss(const mtrx4_t m, mtrx4_t rt); //empty
-
 void    qtnn_zero(qtnn_t q);
 void    qtnn_copy(const qtnn_t q, qtnn_t rt);    
 void 	qtnn_show(const qtnn_t q); 
@@ -95,6 +93,22 @@ void    qtnn_from_axisangl(const vec3_t a, float phi, qtnn_t rt);
 void	qtnn_from_euler(float yaw, float pitch, float roll, qtnn_t rt); 
 void    qtnn_to_vec3(const qtnn_t q, vec3_t rt);
 void    qtnn_transform_vec3(const qtnn_t a, const vec3_t b, vec3_t rt);
+
+void 	mtrx4_copy(const mtrx4_t m, mtrx4_t rt);
+void    mtrx4_zero(mtrx4_t m);
+void    mtrx4_set(float a00, float a01, float a02, float a03,
+                  float a10, float a11, float a12, float a13,
+                  float a20, float a21, float a22, float a23,
+                  float a30, float a31, float a32, float a33,
+                  mtrx3_t rt);
+void	mtrx4_show(const mtrx4_t m);
+void	mtrx4_idtt(mtrx4_t rt);
+void	mtrx4_lu(const mtrx4_t m, mtrx4_t lm, mtrx4_t um);
+void	mtrx4_ldlt(const mtrx4_t m, mtrx4_t lm, vec4_t dv);
+void	mtrx4_get_transpose(const mtrx4_t m, mtrx4_t rt);
+void	mtrx4_tranpose_self(mtrx4_t m);
+void    mtrx4_get_inv(const mtrx4_t m, mtrx4_t rt);
+void    mtrx4_get_inv_gauss(const mtrx4_t m, mtrx4_t rt); //empty
 
 bool    mtrxC_assert(const mtrxC_t *m); //empty
 bool    mtrxC_allocate(int range, mtrxC_t *rt);
