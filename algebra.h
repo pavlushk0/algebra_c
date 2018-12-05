@@ -71,6 +71,7 @@ void	vec3_cross(const vec3_t a, const vec3_t b, vec3_t rt);
 int32_t id_rw(int32_t i, int32_t j, int32_t n);
 int32_t id_cw(int32_t i, int32_t j, int32_t n);
 
+
 void 	mtrx3_copy(const mtrx3_t m, mtrx3_t rt);
 void    mtrx3_zero(mtrx3_t m);
 void    mtrx3_set(float a00, float a01, float a02,
